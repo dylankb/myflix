@@ -1,2 +1,2 @@
-class Vote < ActiveRecord::Base
+class Video < ActiveRecord::Base
 end

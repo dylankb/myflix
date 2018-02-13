@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20180213053708) do
 
   create_table "videos", force: true do |t|
     t.string "title"
-    t.string "description"
-    t.string "thumbnail_url"
-    t.string "image_url"
+    t.text   "description"
+    t.string "thumbnail_image_url"
+    t.string "cover_image_url"
   end
 
 end
