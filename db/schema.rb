@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180213194544) do
     t.text    "description"
     t.string  "thumbnail_image_url"
     t.string  "cover_image_url"
-    t.integer "category_id",         null: false
+    t.integer "category_id"
   end
 
 end
