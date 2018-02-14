@@ -66,7 +66,6 @@ describe Video do
     end
 
     it "returns an empty array if the search string is blank" do
-
       got = Video.create(
         title: 'Game of Thrones',
         description: "Swords and fighting",
