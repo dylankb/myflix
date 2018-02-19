@@ -25,11 +25,14 @@ describe VideosController do
 
       it 'sets @reviews' do
         video = Fabricate(:video)
-        review_1 = Fabricate(:review, video: video)
-        review_2 = Fabricate(:review, video: video)
+        review1 = Fabricate(:review, video: video)
+        review2 = Fabricate(:review, video: video)
+        reviews = [review1, review2]
+        reviews.sort!
+
         get :show, id: video.id
 
-        expect(assigns(:reviews)).to match_array([review_1, review_2])
+        expect(assigns(:reviews)).to match_array([review1, review2])
       end
     end
 
@@ -47,11 +50,13 @@ describe VideosController do
       session[:user_id] = Fabricate(:user).id # "flatter" test with no context
       the_office = Fabricate(:video, title: 'The Office')
       get :search, search_term: 'The'
+
       expect(assigns(:results)).to eq([the_office])
     end
+
     it 'redirects to sign in page for the unauthenticated users' do
-      the_office = Fabricate(:video, title: 'The Office')
       get :search, search_term: 'The'
+
       expect(response).to redirect_to sign_in_path
     end
   end

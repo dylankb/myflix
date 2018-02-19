@@ -12,12 +12,12 @@ dylan = User.create(
           email: 'dylan@example.com',
           password: 'password',
           full_name: 'Dylan Barnard'
-        );
+        )
 bob = User.create(
           email: 'bob@example.com',
           password: 'password',
           full_name: 'Bob Burnquist'
-        );
+        )
 
 rock_30 = Video.create(
   title: '30 Rock',
