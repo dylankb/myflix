@@ -8,6 +8,16 @@
 
 comedy = Category.create(name: 'Comedy')
 scifi = Category.create(name: 'Science Fiction & Fantasy')
+dylan = User.create(
+          email: 'dylan@example.com',
+          password: 'password',
+          full_name: 'Dylan Barnard'
+        );
+bob = User.create(
+          email: 'bob@example.com',
+          password: 'password',
+          full_name: 'Bob Burnquist'
+        );
 
 rock_30 = Video.create(
   title: '30 Rock',
@@ -71,4 +81,25 @@ futurama = Video.create(
   thumbnail_image_url: '/tmp/futurama.jpg',
   cover_image_url: 'http://via.placeholder.com/675x375',
   category_id: comedy.id
+)
+
+Review.create(
+  user: bob,
+  rating: 2,
+  content: 'OMG the red wedding!!!',
+  video: got
+)
+
+Review.create(
+  user: dylan,
+  rating: 5,
+  content: 'Much epic',
+  video: got
+)
+
+Review.create(
+  user: dylan,
+  rating: 5,
+  content: 'The news show of my youth!',
+  video: daily_show
 )
