@@ -10,4 +10,16 @@ class Video < ActiveRecord::Base
     return [] if search_term.blank?
     Video.where("title LIKE ?", "%#{search_term}%").order("created_at DESC")
   end
+
+  def average_rating
+    reviews = Review.where(video: self)
+    return "No Reviews" if reviews.empty?
+
+    total_reviews = reviews.reduce(0) do |acc, review|
+      acc += review.rating
+      acc
+    end
+
+    (total_reviews / reviews.size.to_f).round(1)
+  end
 end
