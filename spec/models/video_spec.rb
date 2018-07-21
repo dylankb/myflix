@@ -81,4 +81,22 @@ describe Video do
       expect(search_result).to eq([])
     end
   end
+
+  describe "average rating" do
+    it "returns the average of all ratings to the first decimal" do
+      video = Fabricate(:video)
+      user1 = Fabricate(:user)
+      user2 = Fabricate(:user)
+
+      review1 = Review.create(rating: 3, video: video, user: user1, content: "Ok")
+      review2 = Review.create(rating: 2, video: video, user: user2, content: "So so")
+
+      expect(video.average_rating).to equal(2.5)
+    end
+    it "returns No Reviews string when no matching ratings" do
+      video = Fabricate(:video)
+
+      expect(video.average_rating).to eq("No Reviews")
+    end
+  end
 end
