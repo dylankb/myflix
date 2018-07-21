@@ -28,4 +28,6 @@ Myflix::Application.routes.draw do
   resources :sessions, only: [:create]
 
   resources :categories, only: [:index]
+
+  get '/queue', to: 'queue_items#index'
 end
