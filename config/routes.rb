@@ -30,4 +30,5 @@ Myflix::Application.routes.draw do
   resources :categories, only: [:index]
 
   get '/queue', to: 'queue_items#index'
+  resources :queue_items, only: [:create]
 end

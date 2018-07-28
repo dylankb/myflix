@@ -10,7 +10,8 @@
         %p=@video.description
         .actions
           %a.btn.btn-primary(href="") Watch Now
-          %a.btn.btn-default(href="") + My Queue
+          -# TODO: Confirm whether link_to "...", ..._path(param_key: { inner_param_key: value }) is the right practice
+          = link_to "Add to Queue", queue_items_path(queue_item: { video_id: @video.id, user_id: current_user.id }), method: :post, class: "btn btn-default"
 
 %section.reviews.container
   .row
