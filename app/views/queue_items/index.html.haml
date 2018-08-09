@@ -25,8 +25,8 @@
                 %td
                   = queue_item.video_average_rating
                 %td
-                  = link_to "TV Shows"
+                  = link_to "#{queue_item.video_category_name}"
                 %td
-                  = link_to "", method: :post do
+                  = link_to queue_item, method: :delete do
                     %i.glyphicon.glyphicon-remove
         = button_to "Update Instant Queue", nil, class: "btn btn-default"

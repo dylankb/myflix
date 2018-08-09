@@ -81,4 +81,47 @@ describe QueueItemsController do
       expect(response).to redirect_to sign_in_path
     end
   end
+
+  describe "DELETE destroy" do
+    let(:alice) { Fabricate(:user) }
+    let(:video) { Fabricate(:video) }
+
+    it "redirects back to the user back to the queue page" do
+      session[:user_id] = alice.id
+      queue_item = Fabricate(:queue_item, video: video, user: alice)
+
+      delete :destroy, id: queue_item.id
+      expect(response).to redirect_to queue_path
+    end
+
+    it "deletes correct queue item" do
+      session[:user_id] = alice.id
+      queue_item = Fabricate(:queue_item, video: video, user: alice)
+      video2 = Fabricate(:video, title: "Hook")
+      queue_item2 = Fabricate(:queue_item, video: video2, user: alice)
+
+      delete :destroy, id: queue_item.id
+
+      expect(alice.queue_items.count).to eq(1)
+      expect(alice.queue_items.first.video_title).to eq("Hook")
+    end
+
+    it "does not delete the queue item if it is not in the current user's queue" do
+      session[:user_id] = alice.id
+      rando = Fabricate(:user)
+      queue_item = Fabricate(:queue_item, video: video, user: alice)
+      queue_item2 = Fabricate(:queue_item, video: video, user: rando)
+
+      delete :destroy, id: queue_item.id
+
+      expect(rando.queue_items.count).to eq(1)
+    end
+
+    it "redirects to the sign in page for unauthenticated users" do
+      queue_item = Fabricate(:queue_item, video: video, user: alice)
+
+      delete :destroy, id: queue_item.id
+      expect(response).to redirect_to sign_in_path
+    end
+  end
 end

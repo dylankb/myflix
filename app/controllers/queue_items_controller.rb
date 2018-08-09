@@ -13,6 +13,12 @@ class QueueItemsController < ApplicationController
     redirect_to queue_path
   end
 
+  def destroy
+    current_user.queue_items.delete(params[:id])
+
+    redirect_to queue_path
+  end
+
   private
 
   def queue_item_params
